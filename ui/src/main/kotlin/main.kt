@@ -1,6 +1,10 @@
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.await
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.html.dom.create
 import kotlinx.html.h1
 import kotlinx.html.pre
@@ -12,7 +16,7 @@ import kotlin.dom.appendText
 import kotlin.js.json
 
 
-fun main() {
+suspend fun main() {
 
     val rootEl = document.getElementById("root_el") as HTMLDivElement
     val gqlRequest = document.create.pre { +"-" }
@@ -53,12 +57,16 @@ fun main() {
 //        }
 //    }
 
-    // lers use co-routines
-    GlobalScope.async {
-        val text = fetchGraphql(req)
-        console.log(text)
-        gqlResponse.textContent = JSON.stringify(JSON.parse(text), null, 2)
+    // lets use co-routines
+    // we marked main as suspend so we have a coroutine scope
+    coroutineScope {
+        async {
+            val text = fetchGraphql(req)
+            console.log(text)
+            gqlResponse.textContent = JSON.stringify(JSON.parse(text), null, 2)
+        }
     }
+
 }
 
 private suspend fun fetchGraphql(req: RequestInit): String = try {

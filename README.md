@@ -47,6 +47,8 @@ mutation {
 }
 ```
 
+For this to work, you obviously need Elasticsearch running as well. You can use my [docker-compose file](https://github.com/jillesvangurp/es-kotlin-wrapper-client/tree/master/es_kibana) for this or manually install & start it.
+
 ## ui
 
 ```

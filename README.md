@@ -1,4 +1,4 @@
-# Simple Demo of using graphql in Kotklin 
+# Simple Demo of using graphql in Kotlin 
 
 Uses Expedia's [graphql library](https://github.com/ExpediaGroup/graphql-kotlin) and is based on their spring example. I've also copied over their examples.
 

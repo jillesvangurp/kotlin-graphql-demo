@@ -1,4 +1,4 @@
-package com.jillesvangurp.graphql.backend.jilleshackery
+package com.jillesvangurp.graphql.backend
 
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus

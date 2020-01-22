@@ -1,0 +1,9 @@
+server.port: 8081
+
+graphql:
+  packages:
+    - "com.jillesvangurp.graphql.backend.examples"
+    - "com.jillesvangurp.graphql.backend.jilleshackery"
+  subscriptions:
+    # Send a ka message every 1000 ms (1 second)
+    keepAliveInterval: 1000

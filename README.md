@@ -25,9 +25,11 @@ After that starts you can play with the examples or try to use my Elasticsearch 
 
 Add a coder:
 
+```
 mutation {
   index(coder: {name: "jilles", level: grand_master})
 }
+```
 
 Query for coders:
 ```

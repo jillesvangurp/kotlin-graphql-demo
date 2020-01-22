@@ -64,13 +64,13 @@ suspend fun main() {
                     gqlResponse.textContent = "in $it ..."
                     delay(1000)
                 }
+
                 val text = fetchGraphql(req)
                 console.log(text)
                 gqlResponse.textContent = JSON.stringify(JSON.parse(text), null, 2)
             }
         }
     }
-
 }
 
 private suspend fun fetchGraphql(req: RequestInit): String = try {

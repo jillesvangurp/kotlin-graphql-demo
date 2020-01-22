@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component
 class EsQueries(val esService: EsService): Query {
 
     @GraphQLDescription("Returns the health status of the Elasticsearch cluster.")
-    fun esHealth() =  esService.esHealth().status
+    suspend fun esHealth() =  esService.esHealth().status
 
     @GraphQLDescription("returns all the coders")
-    fun coders() = esService.findAll()
+    suspend fun coders() = esService.findAll()
 
     @GraphQLDescription("Fuzzy search on coder names. Returns a list of coders.")
-    fun findByName(query: String) = esService.findByName(query)
+    suspend fun findByName(query: String) = esService.findByName(query)
 
     @GraphQLDescription("Returns a simple aggregation of coders on their level")
-    fun levels() = esService.aggOnLevel()
+    suspend fun levels() = esService.aggOnLevel()
 }
 

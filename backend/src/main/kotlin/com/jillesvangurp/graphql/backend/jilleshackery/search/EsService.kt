@@ -5,6 +5,7 @@ import org.elasticsearch.action.search.source
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.RestHighLevelClient
 import org.elasticsearch.client.crudDao
+import org.elasticsearch.client.healthAsync
 import org.elasticsearch.index.query.Operator
 import org.elasticsearch.index.query.QueryBuilders.matchAllQuery
 import org.elasticsearch.index.query.QueryBuilders.matchQuery
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component
 class EsService(val esClient: RestHighLevelClient) {
     val codersCrud = esClient.crudDao<CodeMonkey>("coderz")
 
-    fun esHealth() = esClient.cluster().health(ClusterHealthRequest(), RequestOptions.DEFAULT)
+    suspend fun esHealth() = esClient.cluster().healthAsync(ClusterHealthRequest(), RequestOptions.DEFAULT)
 
     fun index(coder: CodeMonkey): Boolean {
         // use the name as the id
@@ -28,8 +29,8 @@ class EsService(val esClient: RestHighLevelClient) {
         }
     }
 
-    fun findAll(): List<CodeMonkey> =
-        codersCrud.search {
+    suspend fun findAll(): List<CodeMonkey> =
+        codersCrud.searchAsync {
             source(searchSource()
                 .size(100)
                 .query(matchAllQuery()))
@@ -43,11 +44,11 @@ class EsService(val esClient: RestHighLevelClient) {
             false
         }
 
-    fun findByName(query: String) = codersCrud.search {
+    suspend fun findByName(query: String) = codersCrud.searchAsync {
         source(searchSource().size(100).query(matchQuery("name",query).fuzziness("AUTO").operator(Operator.OR)))
     }.mappedHits.toList()
 
-    fun aggOnLevel() = codersCrud.search {
+    suspend fun aggOnLevel() = codersCrud.searchAsync {
         source("""
             {
                 "size": 0,

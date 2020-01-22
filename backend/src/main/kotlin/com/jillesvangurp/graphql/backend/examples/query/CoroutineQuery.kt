@@ -53,4 +53,6 @@ class CoroutineQuery : Query {
         logger.info("CoroutineQuery.fastFunction - computed fast result in ${System.currentTimeMillis() - fastFunctionStart} ms")
         return msg
     }
+
+    suspend fun reallySlowFunction() = "slower"
 }

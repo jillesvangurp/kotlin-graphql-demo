@@ -3,7 +3,7 @@ plugins {
 }
 
 apply {
-//    plugin("kotlin-dce-js")
+    plugin("kotlin-dce-js")
 }
 
 group = "com.jillesvangurp"

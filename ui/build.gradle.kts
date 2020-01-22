@@ -24,6 +24,7 @@ kotlin {
 
         implementation(npm("left-pad", "1.3.0"))
         implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.6.12")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.3.3")
     }
     target {
         useCommonJs()

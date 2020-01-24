@@ -47,9 +47,14 @@ tasks {
         from("src/main/resources/index.html")
         into("build/packaged")
     }
+
+    register<Copy>("copy-dce-html") {
+        from("src/main/resources/dce.html")
+        into("build//kotlin-js-min/main")
+    }
     // does not work because of module errors
     register<JavaExec>("googleClosureCompileDceJs") {
-//        dependsOn("copy-index-html","assemble")
+        dependsOn("copy-index-html","copy-dce-html","assemble","runDceKotlin")
         classpath = closureCompiler
         main = "com.google.javascript.jscomp.CommandLineRunner"
         args = listOf(
@@ -59,7 +64,9 @@ tasks {
             "--js_output_file=build/packaged/${rootProject.name}.js",
             "build/kotlin-js-min/main/kotlin.js",
             "build/kotlin-js-min/main/kotlinx-coroutines-core.js",
-            "build/kotlin-js-min/main/index.js", // yes this is a problem if you have more than 1 npm using that as their main js file, sigh
+            "build/kotlin-js-min/main/kotlinx-html-js.js",
+            // this is left-pad, which the dce plugin fails to name properly. Also, you can only have 1 file called index.js
+            "build/kotlin-js-min/main/index.js",
             "build/kotlin-js-min/main/${rootProject.name}.js"
         )
     }

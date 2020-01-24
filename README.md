@@ -7,7 +7,7 @@ You can use their playground thingy or play with the kotlin-js ui that I gobbled
 All of this was gobbled together in about 6 hours. It's not very good code but it works. The main purpose for this was demoing this in a @codersociety meetup.
 
 - it demoes how you can do graphql stuff in kotlin
-- my elasticsearch kotlin library makes a cameo
+- my [elasticsearch kotlin library](https://github.com/jillesvangurp/es-kotlin-wrapper-client) makes a cameo
 - and since I wanted some simple UI I got side tracked trying to make Kotlin-js do this job. This mainly shows off my lack of effort and how relatively easy this is with the new gradle plugin.
 
 ## Backend
